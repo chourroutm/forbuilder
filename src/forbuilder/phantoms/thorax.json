@@ -1,0 +1,201 @@
+{
+  "name": "thorax",
+  "background": 0,
+  "components": [
+    {
+      "name": "body_outline",
+      "type": "ellipsoid",
+      "value": 140,
+      "center": [0.0, 0.0, 0.0],
+      "semi_axes": [15.0, 19.0, 19.0],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "lung_left",
+      "type": "ellipsoid",
+      "value": 50,
+      "center": [0.0, -5.5, 0.0],
+      "semi_axes": [12.0, 7.0, 9.5],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "lung_right",
+      "type": "ellipsoid",
+      "value": 50,
+      "center": [0.0, 5.5, 0.0],
+      "semi_axes": [12.0, 7.5, 9.5],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "heart",
+      "type": "ellipsoid",
+      "value": 165,
+      "center": [2.0, -2.5, 0.0],
+      "semi_axes": [7.0, 4.5, 6.0],
+      "euler_angles": [0.0, 0.349, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "descending_aorta",
+      "type": "cylinder",
+      "value": 180,
+      "center": [-1.0, -3.0, 0.0],
+      "radius": 1.5,
+      "half_height": 15.0,
+      "axis": [1.0, 0.0, 0.0]
+    },
+    {
+      "name": "spine",
+      "type": "cylinder",
+      "value": 220,
+      "center": [-4.5, 0.0, 0.0],
+      "radius": 2.5,
+      "half_height": 15.0,
+      "axis": [1.0, 0.0, 0.0]
+    },
+    {
+      "name": "spinal_canal",
+      "type": "cylinder",
+      "value": 120,
+      "center": [-4.5, 0.0, 0.0],
+      "radius": 1.0,
+      "half_height": 15.0,
+      "axis": [1.0, 0.0, 0.0]
+    },
+    {
+      "name": "sternum",
+      "type": "ellipsoid",
+      "value": 215,
+      "center": [3.0, 0.0, 0.0],
+      "semi_axes": [8.0, 0.8, 1.5],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "liver",
+      "type": "ellipsoid",
+      "value": 160,
+      "center": [-3.0, 5.0, 3.0],
+      "semi_axes": [6.0, 9.0, 8.0],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "trachea",
+      "type": "cylinder",
+      "value": 60,
+      "center": [5.0, 0.0, 0.0],
+      "radius": 1.2,
+      "half_height": 10.0,
+      "axis": [1.0, 0.0, 0.0]
+    },
+    {
+      "name": "right_atrium",
+      "type": "ellipsoid",
+      "value": 170,
+      "center": [1.0, 2.5, -1.0],
+      "semi_axes": [3.0, 2.5, 3.0],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "left_atrium",
+      "type": "ellipsoid",
+      "value": 170,
+      "center": [0.0, -2.0, -2.0],
+      "semi_axes": [3.0, 2.5, 3.5],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "pulmonary_artery",
+      "type": "ellipsoid",
+      "value": 175,
+      "center": [4.0, -1.5, 0.0],
+      "semi_axes": [2.0, 1.5, 2.5],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "esophagus",
+      "type": "cylinder",
+      "value": 135,
+      "center": [0.0, -2.0, 0.0],
+      "radius": 1.0,
+      "half_height": 15.0,
+      "axis": [1.0, 0.0, 0.0]
+    },
+    {
+      "name": "rib_left_1",
+      "type": "ellipsoid",
+      "value": 210,
+      "center": [8.0, -9.0, -5.0],
+      "semi_axes": [1.0, 5.0, 0.8],
+      "euler_angles": [0.0, 0.0, 0.175],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "rib_right_1",
+      "type": "ellipsoid",
+      "value": 210,
+      "center": [8.0, 9.0, -5.0],
+      "semi_axes": [1.0, 5.0, 0.8],
+      "euler_angles": [0.0, 0.0, -0.175],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "rib_left_2",
+      "type": "ellipsoid",
+      "value": 210,
+      "center": [4.0, -10.0, -5.0],
+      "semi_axes": [1.0, 5.0, 0.8],
+      "euler_angles": [0.0, 0.0, 0.175],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "rib_right_2",
+      "type": "ellipsoid",
+      "value": 210,
+      "center": [4.0, 10.0, -5.0],
+      "semi_axes": [1.0, 5.0, 0.8],
+      "euler_angles": [0.0, 0.0, -0.175],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "rib_left_3",
+      "type": "ellipsoid",
+      "value": 210,
+      "center": [0.0, -10.5, -5.0],
+      "semi_axes": [1.0, 5.5, 0.8],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "rib_right_3",
+      "type": "ellipsoid",
+      "value": 210,
+      "center": [0.0, 10.5, -5.0],
+      "semi_axes": [1.0, 5.5, 0.8],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    }
+  ]
+}

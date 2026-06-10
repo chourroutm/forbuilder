@@ -1,0 +1,327 @@
+{
+  "name": "head",
+  "background": 0,
+  "components": [
+    {
+      "name": "outer_skull",
+      "type": "ellipsoid",
+      "value": 200,
+      "center": [0.0, 0.0, 0.0],
+      "semi_axes": [9.6, 12.0, 12.5],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "inner_skull",
+      "type": "ellipsoid",
+      "value": 128,
+      "center": [0.0, 0.0, 0.0],
+      "semi_axes": [9.2, 11.5, 12.0],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "cerebrum",
+      "type": "ellipsoid",
+      "value": 135,
+      "center": [0.0, 0.0, 0.0],
+      "semi_axes": [8.9, 11.0, 11.5],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "cerebellum",
+      "type": "ellipsoid",
+      "value": 133,
+      "center": [-3.5, 0.0, 0.0],
+      "semi_axes": [3.5, 5.5, 6.5],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": -9.6,
+      "z_max": null
+    },
+    {
+      "name": "ventricle_left",
+      "type": "ellipsoid",
+      "value": 120,
+      "center": [1.5, -1.0, 0.0],
+      "semi_axes": [1.8, 2.5, 3.5],
+      "euler_angles": [0.0, 0.0, 0.349],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "ventricle_right",
+      "type": "ellipsoid",
+      "value": 120,
+      "center": [1.5, 1.0, 0.0],
+      "semi_axes": [1.8, 2.5, 3.5],
+      "euler_angles": [0.0, 0.0, -0.349],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "ventricle_third",
+      "type": "ellipsoid",
+      "value": 120,
+      "center": [1.5, 0.0, 0.0],
+      "semi_axes": [0.7, 0.6, 1.5],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "midbrain",
+      "type": "ellipsoid",
+      "value": 134,
+      "center": [-0.5, 0.0, 0.0],
+      "semi_axes": [2.0, 2.5, 2.0],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": -2.5,
+      "z_max": 1.0
+    },
+    {
+      "name": "eye_left",
+      "type": "sphere",
+      "value": 180,
+      "center": [7.5, -4.5, 9.0],
+      "radius": 1.5
+    },
+    {
+      "name": "eye_right",
+      "type": "sphere",
+      "value": 180,
+      "center": [7.5, 4.5, 9.0],
+      "radius": 1.5
+    },
+    {
+      "name": "lens_left",
+      "type": "sphere",
+      "value": 210,
+      "center": [7.5, -4.5, 10.2],
+      "radius": 0.4
+    },
+    {
+      "name": "lens_right",
+      "type": "sphere",
+      "value": 210,
+      "center": [7.5, 4.5, 10.2],
+      "radius": 0.4
+    },
+    {
+      "name": "sphenoid_left",
+      "type": "ellipsoid",
+      "value": 200,
+      "center": [2.5, -4.5, 2.0],
+      "semi_axes": [1.0, 1.5, 2.0],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "sphenoid_right",
+      "type": "ellipsoid",
+      "value": 200,
+      "center": [2.5, 4.5, 2.0],
+      "semi_axes": [1.0, 1.5, 2.0],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "temporal_bone_left",
+      "type": "ellipsoid",
+      "value": 220,
+      "center": [0.0, -8.0, 0.0],
+      "semi_axes": [3.5, 2.5, 3.5],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "temporal_bone_right",
+      "type": "ellipsoid",
+      "value": 220,
+      "center": [0.0, 8.0, 0.0],
+      "semi_axes": [3.5, 2.5, 3.5],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "petrous_left",
+      "type": "ellipsoid",
+      "value": 230,
+      "center": [0.0, -7.0, -2.0],
+      "semi_axes": [2.5, 2.0, 3.0],
+      "euler_angles": [0.0, 0.349, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "petrous_right",
+      "type": "ellipsoid",
+      "value": 230,
+      "center": [0.0, 7.0, -2.0],
+      "semi_axes": [2.5, 2.0, 3.0],
+      "euler_angles": [0.0, -0.349, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "mastoid_left",
+      "type": "ellipsoid",
+      "value": 215,
+      "center": [-2.0, -8.5, -3.0],
+      "semi_axes": [2.0, 2.0, 2.5],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "mastoid_right",
+      "type": "ellipsoid",
+      "value": 215,
+      "center": [-2.0, 8.5, -3.0],
+      "semi_axes": [2.0, 2.0, 2.5],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "frontal_sinus",
+      "type": "ellipsoid",
+      "value": 115,
+      "center": [7.0, 0.0, 4.5],
+      "semi_axes": [1.5, 2.5, 1.0],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "ethmoid_left",
+      "type": "ellipsoid",
+      "value": 115,
+      "center": [5.0, -1.5, 3.0],
+      "semi_axes": [1.2, 0.8, 1.2],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "ethmoid_right",
+      "type": "ellipsoid",
+      "value": 115,
+      "center": [5.0, 1.5, 3.0],
+      "semi_axes": [1.2, 0.8, 1.2],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "maxillary_sinus_left",
+      "type": "ellipsoid",
+      "value": 115,
+      "center": [3.5, -3.5, 5.0],
+      "semi_axes": [2.0, 1.8, 2.0],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "maxillary_sinus_right",
+      "type": "ellipsoid",
+      "value": 115,
+      "center": [3.5, 3.5, 5.0],
+      "semi_axes": [2.0, 1.8, 2.0],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "caudate_left",
+      "type": "ellipsoid",
+      "value": 136,
+      "center": [3.0, -2.0, 1.0],
+      "semi_axes": [1.5, 1.0, 2.0],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "caudate_right",
+      "type": "ellipsoid",
+      "value": 136,
+      "center": [3.0, 2.0, 1.0],
+      "semi_axes": [1.5, 1.0, 2.0],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "thalamus_left",
+      "type": "ellipsoid",
+      "value": 137,
+      "center": [1.5, -1.5, 0.5],
+      "semi_axes": [2.0, 1.5, 2.5],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "thalamus_right",
+      "type": "ellipsoid",
+      "value": 137,
+      "center": [1.5, 1.5, 0.5],
+      "semi_axes": [2.0, 1.5, 2.5],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": null,
+      "z_max": null
+    },
+    {
+      "name": "pituitary",
+      "type": "sphere",
+      "value": 140,
+      "center": [2.0, 0.0, 0.5],
+      "radius": 0.5
+    },
+    {
+      "name": "pineal",
+      "type": "sphere",
+      "value": 138,
+      "center": [0.5, 0.0, 0.0],
+      "radius": 0.3
+    },
+    {
+      "name": "brainstem",
+      "type": "ellipsoid",
+      "value": 134,
+      "center": [-2.5, 0.0, 0.0],
+      "semi_axes": [2.5, 2.0, 2.0],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": -9.2,
+      "z_max": -0.5
+    },
+    {
+      "name": "spinal_cord",
+      "type": "cylinder",
+      "value": 132,
+      "center": [-8.0, 0.0, 0.0],
+      "radius": 1.2,
+      "half_height": 3.0,
+      "axis": [1.0, 0.0, 0.0]
+    },
+    {
+      "name": "skull_base",
+      "type": "ellipsoid",
+      "value": 205,
+      "center": [0.0, 0.0, 0.0],
+      "semi_axes": [9.6, 12.0, 12.5],
+      "euler_angles": [0.0, 0.0, 0.0],
+      "z_min": -9.6,
+      "z_max": -7.5
+    }
+  ]
+}

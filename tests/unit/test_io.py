@@ -77,6 +77,37 @@ class TestNiftiWriter:
         assert tuple(loaded.shape) == (4, 6, 8)
 
 
+class TestNiftiReader:
+    def test_read_nifti_gz_shape(self, tmp_path):
+        from forbuilder.io.nifti import read_nifti, write_nifti
+
+        phantom = _make_phantom((4, 6, 8))
+        p = tmp_path / "out.nii.gz"
+        write_nifti(phantom, p)
+        result = read_nifti(p)
+        assert result.array.shape == (4, 6, 8)
+        assert result.array.dtype == np.uint8
+
+    def test_read_nifti_uncompressed_shape(self, tmp_path):
+        from forbuilder.io.nifti import read_nifti, write_nifti
+
+        phantom = _make_phantom((4, 6, 8))
+        p = tmp_path / "out.nii"
+        write_nifti(phantom, p)
+        result = read_nifti(p)
+        assert result.array.shape == (4, 6, 8)
+        assert result.array.dtype == np.uint8
+
+    def test_read_nifti_voxel_size(self, tmp_path):
+        from forbuilder.io.nifti import read_nifti, write_nifti
+
+        phantom = GeneratedPhantom(array=np.zeros((4, 6, 8), dtype=np.uint8), voxel_size=(1.5, 0.5, 0.25))
+        p = tmp_path / "out.nii.gz"
+        write_nifti(phantom, p)
+        result = read_nifti(p)
+        assert result.voxel_size == pytest.approx((1.5, 0.5, 0.25))
+
+
 class TestZarrWriter:
     def test_creates_directory(self, tmp_path):
         from forbuilder.io.zarr_ import write_zarr
@@ -150,3 +181,29 @@ class TestSaveDispatcher:
         p = tmp_path / "out.tiff"
         save(_make_phantom(), p)
         assert p.exists()
+
+
+class TestLoadDispatcher:
+    def test_load_nifti_gz(self, tmp_path):
+        from forbuilder.io import load, save
+
+        p = tmp_path / "out.nii.gz"
+        save(_make_phantom((4, 6, 8)), p)
+        result = load(p)
+        assert result.array.shape == (4, 6, 8)
+        assert result.array.dtype == np.uint8
+
+    def test_load_nifti_uncompressed(self, tmp_path):
+        from forbuilder.io import load, save
+
+        p = tmp_path / "out.nii"
+        save(_make_phantom((4, 6, 8)), p)
+        result = load(p)
+        assert result.array.shape == (4, 6, 8)
+        assert result.array.dtype == np.uint8
+
+    def test_load_unknown_extension_raises(self, tmp_path):
+        from forbuilder.io import load
+
+        with pytest.raises(ValueError):
+            load(tmp_path / "out.tif")

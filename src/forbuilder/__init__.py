@@ -16,6 +16,7 @@ __all__ = [
     "generate",
     "get_components",
     "get_slice",
+    "load",
     "save",
     "GeneratedPhantom",
     "PhantomSpec",
@@ -137,6 +138,36 @@ def get_slice(
     return _get_slice(source, axis=axis, index=index, shape=shape, voxel_size=voxel_size)
 
 
+def load(path: "str | os.PathLike") -> GeneratedPhantom:
+    """Load a phantom from a NIfTI file on disk.
+
+    Parameters
+    ----------
+    path: Source file path (``.nii`` or ``.nii.gz``).
+
+    Returns
+    -------
+    GeneratedPhantom with the array cast to uint8 and voxel size read from
+    the NIfTI header.
+
+    Raises
+    ------
+    ValueError  Unrecognised or unsupported file extension.
+
+    Example
+    -------
+    >>> import forbuilder as fb
+    >>> p = fb.generate("head", shape=(64, 64, 64), voxel_size=1.0)
+    >>> fb.save(p, "head.nii.gz")
+    >>> p2 = fb.load("head.nii.gz")
+    >>> p2.array.shape
+    (64, 64, 64)
+    """
+    from forbuilder.io import load as _load
+
+    return _load(path)
+
+
 def save(
     phantom: GeneratedPhantom,
     path: "str | os.PathLike",
@@ -144,9 +175,9 @@ def save(
     """Write a phantom to disk in TIFF, NIfTI, or OME-Zarr v0.5 format.
 
     The output format is inferred from the file extension:
-    - ``.tif`` / ``.tiff`` → multi-page TIFF (ImageJ compatible)
-    - ``.nii.gz``          → NIfTI-1 compressed
-    - ``.ome.zarr``        → OME-Zarr v0.5 (OME-NGFF 0.5, Zarr v3)
+    - ``.tif`` / ``.tiff``    → multi-page TIFF (ImageJ compatible)
+    - ``.nii`` / ``.nii.gz``  → NIfTI-1 (uncompressed / compressed)
+    - ``.ome.zarr``           → OME-Zarr v0.5 (OME-NGFF 0.5, Zarr v3)
 
     Parameters
     ----------

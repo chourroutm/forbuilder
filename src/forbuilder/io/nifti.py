@@ -1,4 +1,4 @@
-"""Write a GeneratedPhantom to a compressed NIfTI-1 file."""
+"""NIfTI-1 read/write for GeneratedPhantom."""
 
 from __future__ import annotations
 
@@ -11,17 +11,16 @@ from forbuilder.rasterizer import GeneratedPhantom
 
 
 def write_nifti(phantom: GeneratedPhantom, path: str | os.PathLike) -> None:
-    """Write *phantom* to a NIfTI-1 compressed file (``.nii.gz``).
-
-    Parameters
-    ----------
-    phantom: The phantom to write.
-    path:    Destination path (e.g. ``"output.nii.gz"``).
-    """
     dz, dy, dx = phantom.voxel_size
-    # Diagonal affine: voxel size in mm along each axis
     affine = np.diag([dx, dy, dz, 1.0])
     img = nib.Nifti1Image(phantom.array, affine=affine)
-    # Set spatial units to mm
     img.header.set_xyzt_units(xyz="mm")
     nib.save(img, str(path))
+
+
+def read_nifti(path: str | os.PathLike) -> GeneratedPhantom:
+    img = nib.load(str(path))
+    array = np.asarray(img.dataobj, dtype=np.uint8)
+    # get_zooms() returns (dx, dy, dz); voxel_size convention is (dz, dy, dx)
+    dx, dy, dz = (float(z) for z in img.header.get_zooms()[:3])
+    return GeneratedPhantom(array=array, voxel_size=(dz, dy, dx))

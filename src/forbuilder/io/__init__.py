@@ -58,3 +58,29 @@ def save(phantom: GeneratedPhantom, path: str | os.PathLike) -> None:
         f"Unrecognised file extension in {str(path)!r}. "
         "Supported: .tif, .tiff, .nii, .nii.gz, .ome.zarr"
     )
+
+
+def load(path: str | os.PathLike) -> GeneratedPhantom:
+    """Read a NIfTI phantom from disk; format inferred from the file extension.
+
+    Parameters
+    ----------
+    path: Source file path. Supported extensions:
+          ``.nii`` / ``.nii.gz`` → NIfTI-1.
+
+    Raises
+    ------
+    ValueError  Unrecognised or unsupported file extension.
+    """
+    p = Path(path)
+    name = p.name.lower()
+
+    if name.endswith(".nii.gz") or name.endswith(".nii"):
+        from forbuilder.io.nifti import read_nifti
+
+        return read_nifti(p)
+
+    raise ValueError(
+        f"Unrecognised or unsupported file extension in {str(path)!r}. "
+        "Supported for loading: .nii, .nii.gz"
+    )

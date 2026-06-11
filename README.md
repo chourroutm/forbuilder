@@ -30,6 +30,10 @@ fb.save(phantom, "head.nii.gz")    # NIfTI-1 compressed
 fb.save(phantom, "head.nii")       # NIfTI-1 uncompressed
 fb.save(phantom, "head.ome.zarr")  # OME-Zarr v0.5
 
+# Load a previously saved NIfTI phantom
+phantom2 = fb.load("head.nii.gz")
+phantom3 = fb.load("head.nii")
+
 # Override a component's grey value before rasterizing
 phantom_custom = fb.generate(
     "head",

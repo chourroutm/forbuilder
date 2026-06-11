@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from typing import Optional
 
 import numpy as np
 
@@ -18,15 +19,20 @@ class GeneratedPhantom:
     Parameters
     ----------
     array:      3-D uint8 NumPy array of shape (nz, ny, nx).
-    shape:      (nz, ny, nx).
     voxel_size: Physical voxel dimensions (dz, dy, dx) in mm.
-    spec:       The PhantomSpec used to produce this phantom.
+    shape:      (nz, ny, nx) — derived from array when omitted.
+    spec:       The PhantomSpec used to produce this phantom; ``None`` for
+                phantoms loaded from disk.
     """
 
     array: np.ndarray
-    shape: tuple[int, int, int]
     voxel_size: tuple[float, float, float]
-    spec: PhantomSpec
+    shape: tuple[int, int, int] = field(default=None)  # type: ignore[assignment]
+    spec: Optional[PhantomSpec] = None
+
+    def __post_init__(self) -> None:
+        if self.shape is None:
+            self.shape = tuple(self.array.shape)  # type: ignore[assignment]
 
 
 # ---------------------------------------------------------------------------

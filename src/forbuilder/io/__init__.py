@@ -61,12 +61,14 @@ def save(phantom: GeneratedPhantom, path: str | os.PathLike) -> None:
 
 
 def load(path: str | os.PathLike) -> GeneratedPhantom:
-    """Read a NIfTI phantom from disk; format inferred from the file extension.
+    """Read a phantom from disk; format inferred from the file extension.
 
     Parameters
     ----------
     path: Source file path. Supported extensions:
-          ``.nii`` / ``.nii.gz`` → NIfTI-1.
+          ``.tif`` / ``.tiff`` → TIFF,
+          ``.nii`` / ``.nii.gz`` → NIfTI-1,
+          ``.ome.zarr`` → OME-Zarr v0.5.
 
     Raises
     ------
@@ -80,7 +82,18 @@ def load(path: str | os.PathLike) -> GeneratedPhantom:
 
         return read_nifti(p)
 
+    if name.endswith(".ome.zarr"):
+        from forbuilder.io.zarr_ import read_zarr
+
+        return read_zarr(p)
+
+    suffix = p.suffix.lower()
+    if suffix in _TIFF_EXTENSIONS:
+        from forbuilder.io.tiff import read_tiff
+
+        return read_tiff(p)
+
     raise ValueError(
         f"Unrecognised or unsupported file extension in {str(path)!r}. "
-        "Supported for loading: .nii, .nii.gz"
+        "Supported for loading: .tif, .tiff, .nii, .nii.gz, .ome.zarr"
     )

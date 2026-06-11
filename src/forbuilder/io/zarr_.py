@@ -1,12 +1,24 @@
-"""Write a GeneratedPhantom to an OME-Zarr v0.5 store (OME-NGFF 0.5, Zarr v3)."""
+"""OME-Zarr v0.5 read/write for GeneratedPhantom (OME-NGFF 0.5, Zarr v3)."""
 
 from __future__ import annotations
 
 import os
 
+import numpy as np
 import zarr
 
 from forbuilder.rasterizer import GeneratedPhantom
+
+
+def read_zarr(path: str | os.PathLike) -> GeneratedPhantom:
+    store = zarr.open_group(str(path), mode="r")
+    array = np.asarray(store["0"], dtype=np.uint8)
+    scale = (
+        store.attrs["ome"]["multiscales"][0]["datasets"][0]
+        ["coordinateTransformations"][0]["scale"]
+    )
+    dz, dy, dx = (float(s) for s in scale)
+    return GeneratedPhantom(array=array, voxel_size=(dz, dy, dx))
 
 
 def write_zarr(phantom: GeneratedPhantom, path: str | os.PathLike) -> None:

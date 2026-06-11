@@ -139,16 +139,17 @@ def get_slice(
 
 
 def load(path: "str | os.PathLike") -> GeneratedPhantom:
-    """Load a phantom from a NIfTI file on disk.
+    """Load a phantom from a TIFF, NIfTI, or OME-Zarr file on disk.
 
     Parameters
     ----------
-    path: Source file path (``.nii`` or ``.nii.gz``).
+    path: Source file path. Supported extensions:
+          ``.tif`` / ``.tiff``, ``.nii`` / ``.nii.gz``, ``.ome.zarr``.
 
     Returns
     -------
     GeneratedPhantom with the array cast to uint8 and voxel size read from
-    the NIfTI header.
+    the file's metadata.
 
     Raises
     ------

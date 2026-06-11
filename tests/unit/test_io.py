@@ -17,6 +17,72 @@ def _make_phantom(shape=(8, 8, 8)) -> GeneratedPhantom:
     return rasterize(spec, shape=shape, voxel_size=1.0)
 
 
+class TestTiffReader:
+    def test_round_trip_shape(self, tmp_path):
+        from forbuilder.io.tiff import read_tiff, write_tiff
+
+        phantom = _make_phantom((4, 6, 8))
+        p = tmp_path / "out.tif"
+        write_tiff(phantom, p)
+        result = read_tiff(p)
+        assert result.array.shape == (4, 6, 8)
+        assert result.array.dtype == np.uint8
+
+    def test_round_trip_voxel_size(self, tmp_path):
+        from forbuilder.io.tiff import read_tiff, write_tiff
+
+        phantom = GeneratedPhantom(
+            array=np.zeros((4, 4, 4), dtype=np.uint8), voxel_size=(2.0, 0.5, 1.0)
+        )
+        p = tmp_path / "out.tif"
+        write_tiff(phantom, p)
+        result = read_tiff(p)
+        assert result.voxel_size == pytest.approx((2.0, 0.5, 1.0))
+
+    def test_round_trip_array_values(self, tmp_path):
+        from forbuilder.io.tiff import read_tiff, write_tiff
+
+        phantom = _make_phantom((4, 6, 8))
+        p = tmp_path / "out.tif"
+        write_tiff(phantom, p)
+        result = read_tiff(p)
+        assert np.array_equal(result.array, phantom.array)
+
+
+class TestZarrReader:
+    def test_round_trip_shape(self, tmp_path):
+        from forbuilder.io.zarr_ import read_zarr, write_zarr
+
+        phantom = _make_phantom((4, 6, 8))
+        p = tmp_path / "out.ome.zarr"
+        write_zarr(phantom, p)
+        result = read_zarr(p)
+        assert result.array.shape == (4, 6, 8)
+        assert result.array.dtype == np.uint8
+
+    def test_round_trip_voxel_size(self, tmp_path):
+        from forbuilder.io.zarr_ import read_zarr, write_zarr
+
+        phantom = GeneratedPhantom(
+            array=np.zeros((4, 4, 4), dtype=np.uint8),
+            voxel_size=(2.0, 0.5, 1.0),
+            spec=_make_phantom().spec,
+        )
+        p = tmp_path / "out.ome.zarr"
+        write_zarr(phantom, p)
+        result = read_zarr(p)
+        assert result.voxel_size == pytest.approx((2.0, 0.5, 1.0))
+
+    def test_round_trip_array_values(self, tmp_path):
+        from forbuilder.io.zarr_ import read_zarr, write_zarr
+
+        phantom = _make_phantom((4, 6, 8))
+        p = tmp_path / "out.ome.zarr"
+        write_zarr(phantom, p)
+        result = read_zarr(p)
+        assert np.array_equal(result.array, phantom.array)
+
+
 class TestTiffWriter:
     def test_creates_file(self, tmp_path):
         from forbuilder.io.tiff import write_tiff
@@ -184,6 +250,23 @@ class TestSaveDispatcher:
 
 
 class TestLoadDispatcher:
+    def test_load_tif(self, tmp_path):
+        from forbuilder.io import load, save
+
+        p = tmp_path / "out.tif"
+        save(_make_phantom((4, 6, 8)), p)
+        result = load(p)
+        assert result.array.shape == (4, 6, 8)
+        assert result.array.dtype == np.uint8
+
+    def test_load_tiff(self, tmp_path):
+        from forbuilder.io import load, save
+
+        p = tmp_path / "out.tiff"
+        save(_make_phantom((4, 6, 8)), p)
+        result = load(p)
+        assert result.array.shape == (4, 6, 8)
+
     def test_load_nifti_gz(self, tmp_path):
         from forbuilder.io import load, save
 
@@ -202,8 +285,17 @@ class TestLoadDispatcher:
         assert result.array.shape == (4, 6, 8)
         assert result.array.dtype == np.uint8
 
+    def test_load_ome_zarr(self, tmp_path):
+        from forbuilder.io import load, save
+
+        p = tmp_path / "out.ome.zarr"
+        save(_make_phantom((4, 6, 8)), p)
+        result = load(p)
+        assert result.array.shape == (4, 6, 8)
+        assert result.array.dtype == np.uint8
+
     def test_load_unknown_extension_raises(self, tmp_path):
         from forbuilder.io import load
 
         with pytest.raises(ValueError):
-            load(tmp_path / "out.tif")
+            load(tmp_path / "out.xyz")

@@ -146,6 +146,26 @@ class TestSave:
         loaded = nib.load(str(path))
         assert tuple(loaded.shape) == p.array.shape
 
+    def test_load_tif_round_trip(self, tmp_path):
+        path = tmp_path / "out.tif"
+        p = self._phantom()
+        fb.save(p, path)
+        result = fb.load(path)
+        assert result.array.shape == p.array.shape
+        assert result.array.dtype == p.array.dtype
+        assert np.array_equal(result.array, p.array)
+        assert result.voxel_size == pytest.approx(p.voxel_size)
+
+    def test_load_ome_zarr_round_trip(self, tmp_path):
+        path = tmp_path / "out.ome.zarr"
+        p = self._phantom()
+        fb.save(p, path)
+        result = fb.load(path)
+        assert result.array.shape == p.array.shape
+        assert result.array.dtype == p.array.dtype
+        assert np.array_equal(result.array, p.array)
+        assert result.voxel_size == pytest.approx(p.voxel_size)
+
     def test_load_nifti_gz_round_trip(self, tmp_path):
         path = tmp_path / "out.nii.gz"
         p = self._phantom()

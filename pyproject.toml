@@ -15,6 +15,10 @@ dependencies = [
     "zarr>=3.0",
 ]
 
+[project.scripts]
+forbild-head-gen = "forbuilder.cli:head_main"
+forbild-thorax-gen = "forbuilder.cli:thorax_main"
+
 [project.optional-dependencies]
 yaml = ["pyyaml"]
 dev = [

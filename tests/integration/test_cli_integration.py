@@ -29,7 +29,7 @@ def _run_ep(entry_point: str, args: list[str]) -> subprocess.CompletedProcess:
 # ---------------------------------------------------------------------------
 
 
-@pytest.mark.parametrize("ext", [".tif", ".nii.gz", ".ome.zarr"])
+@pytest.mark.parametrize("ext", [".tif", ".nii.gz", ".nii", ".ome.zarr"])
 def test_head_gen_exits_0_and_writes_file(tmp_path, ext):
     out = tmp_path / f"head{ext}"
     result = _run_ep(
@@ -71,7 +71,7 @@ def test_head_gen_bad_extension_exits_nonzero(tmp_path):
 # ---------------------------------------------------------------------------
 
 
-@pytest.mark.parametrize("ext", [".tif", ".nii.gz", ".ome.zarr"])
+@pytest.mark.parametrize("ext", [".tif", ".nii.gz", ".nii", ".ome.zarr"])
 def test_thorax_gen_exits_0_and_writes_file(tmp_path, ext):
     out = tmp_path / f"thorax{ext}"
     result = _run_ep(

@@ -49,10 +49,18 @@ class TestTiffWriter:
 
 
 class TestNiftiWriter:
-    def test_creates_file(self, tmp_path):
+    def test_creates_file_gz(self, tmp_path):
         from forbuilder.io.nifti import write_nifti
 
         p = tmp_path / "out.nii.gz"
+        write_nifti(_make_phantom(), p)
+        assert p.exists()
+        assert p.stat().st_size > 0
+
+    def test_creates_file_uncompressed(self, tmp_path):
+        from forbuilder.io.nifti import write_nifti
+
+        p = tmp_path / "out.nii"
         write_nifti(_make_phantom(), p)
         assert p.exists()
         assert p.stat().st_size > 0
@@ -109,10 +117,17 @@ class TestSaveDispatcher:
         save(_make_phantom(), p)
         assert p.exists()
 
-    def test_nifti_dispatched(self, tmp_path):
+    def test_nifti_gz_dispatched(self, tmp_path):
         from forbuilder.io import save
 
         p = tmp_path / "out.nii.gz"
+        save(_make_phantom(), p)
+        assert p.exists()
+
+    def test_nifti_uncompressed_dispatched(self, tmp_path):
+        from forbuilder.io import save
+
+        p = tmp_path / "out.nii"
         save(_make_phantom(), p)
         assert p.exists()
 

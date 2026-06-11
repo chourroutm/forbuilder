@@ -97,8 +97,14 @@ class TestSave:
         assert path.exists()
         assert path.stat().st_size > 0
 
-    def test_save_nifti(self, tmp_path):
+    def test_save_nifti_gz(self, tmp_path):
         path = tmp_path / "out.nii.gz"
+        fb.save(self._phantom(), path)
+        assert path.exists()
+        assert path.stat().st_size > 0
+
+    def test_save_nifti_uncompressed(self, tmp_path):
+        path = tmp_path / "out.nii"
         fb.save(self._phantom(), path)
         assert path.exists()
         assert path.stat().st_size > 0
@@ -122,10 +128,19 @@ class TestSave:
         loaded = tifffile.imread(str(path))
         assert loaded.shape == p.array.shape
 
-    def test_nifti_round_trip_shape(self, tmp_path):
+    def test_nifti_gz_round_trip_shape(self, tmp_path):
         import nibabel as nib
 
         path = tmp_path / "out.nii.gz"
+        p = self._phantom()
+        fb.save(p, path)
+        loaded = nib.load(str(path))
+        assert tuple(loaded.shape) == p.array.shape
+
+    def test_nifti_uncompressed_round_trip_shape(self, tmp_path):
+        import nibabel as nib
+
+        path = tmp_path / "out.nii"
         p = self._phantom()
         fb.save(p, path)
         loaded = nib.load(str(path))

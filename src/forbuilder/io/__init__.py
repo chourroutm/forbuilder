@@ -8,7 +8,7 @@ from pathlib import Path
 from forbuilder.rasterizer import GeneratedPhantom
 
 _TIFF_EXTENSIONS = {".tif", ".tiff"}
-_NIFTI_EXTENSIONS = {".nii.gz"}
+_NIFTI_EXTENSIONS = {".nii.gz", ".nii"}
 _ZARR_EXTENSIONS = {".ome.zarr"}
 
 
@@ -20,7 +20,7 @@ def save(phantom: GeneratedPhantom, path: str | os.PathLike) -> None:
     phantom: The phantom to write.
     path:    Destination path. Supported extensions:
              ``.tif`` / ``.tiff`` → TIFF,
-             ``.nii.gz`` → NIfTI-1,
+             ``.nii`` / ``.nii.gz`` → NIfTI-1,
              ``.ome.zarr`` → OME-Zarr v0.5.
 
     Raises
@@ -35,7 +35,7 @@ def save(phantom: GeneratedPhantom, path: str | os.PathLike) -> None:
     p = Path(path)
     name = p.name.lower()
 
-    if name.endswith(".nii.gz"):
+    if name.endswith(".nii.gz") or name.endswith(".nii"):
         from forbuilder.io.nifti import write_nifti
 
         write_nifti(phantom, p)
@@ -56,5 +56,5 @@ def save(phantom: GeneratedPhantom, path: str | os.PathLike) -> None:
 
     raise ValueError(
         f"Unrecognised file extension in {str(path)!r}. "
-        "Supported: .tif, .tiff, .nii.gz, .ome.zarr"
+        "Supported: .tif, .tiff, .nii, .nii.gz, .ome.zarr"
     )

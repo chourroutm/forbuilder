@@ -7,7 +7,7 @@ import sys
 
 import forbuilder as fb
 
-_SUPPORTED_EXTENSIONS = (".tif", ".tiff", ".nii.gz", ".ome.zarr")
+_SUPPORTED_EXTENSIONS = (".tif", ".tiff", ".nii.gz", ".nii", ".ome.zarr")
 
 
 def _build_parser(prog: str) -> argparse.ArgumentParser:

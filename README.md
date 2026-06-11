@@ -26,7 +26,8 @@ print(slice_2d.shape)        # (256, 256)
 
 # Save to disk — format is inferred from the extension
 fb.save(phantom, "head.tif")       # multi-page TIFF
-fb.save(phantom, "head.nii.gz")    # NIfTI-1
+fb.save(phantom, "head.nii.gz")    # NIfTI-1 compressed
+fb.save(phantom, "head.nii")       # NIfTI-1 uncompressed
 fb.save(phantom, "head.ome.zarr")  # OME-Zarr v0.5
 
 # Override a component's grey value before rasterizing
@@ -71,4 +72,4 @@ forbild-thorax-gen --shape 256 256 256 --voxel-size 0.5 --output thorax.ome.zarr
 |------|----------|-------------|
 | `--shape NZ NY NX` | yes | Output volume dimensions |
 | `--voxel-size V` or `--voxel-size VZ VY VX` | yes | Voxel size in mm (isotropic or anisotropic) |
-| `--output PATH` | yes | Destination file (`.tif`/`.tiff`, `.nii.gz`, `.ome.zarr`) |
+| `--output PATH` | yes | Destination file (`.tif`/`.tiff`, `.nii`, `.nii.gz`, `.ome.zarr`) |

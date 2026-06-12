@@ -194,8 +194,9 @@ class TestSave:
         fb.save(p, path)
         store = zarr.open_group(str(path), mode="r")
         assert "ome" in store.attrs
-        ms = store.attrs["ome"]["multiscales"][0]
-        assert ms["version"] == "0.5"
+        ome = store.attrs["ome"]
+        assert ome["version"] == "0.5"
+        ms = ome["multiscales"][0]
         assert len(ms["axes"]) == 3
 
 

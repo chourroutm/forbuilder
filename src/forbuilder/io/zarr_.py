@@ -34,13 +34,15 @@ def write_zarr(phantom: GeneratedPhantom, path: str | os.PathLike) -> None:
     """
     dz, dy, dx = phantom.voxel_size
     store = zarr.open_group(str(path), mode="w", zarr_format=3)
-    arr = store.create_array("0", shape=phantom.shape, dtype="uint8")
+    arr = store.create_array(
+        "0", shape=phantom.shape, dtype="uint8", dimension_names=("z", "y", "x")
+    )
     arr[:] = phantom.array
     store.attrs["ome"] = {
+        "version": "0.5",
         "multiscales": [
             {
-                "version": "0.5",
-                "name": phantom.spec.name,
+                "name": phantom.spec.name if phantom.spec is not None else None,
                 "axes": [
                     {"name": "z", "type": "space", "unit": "millimeter"},
                     {"name": "y", "type": "space", "unit": "millimeter"},
@@ -54,9 +56,6 @@ def write_zarr(phantom: GeneratedPhantom, path: str | os.PathLike) -> None:
                         ],
                     }
                 ],
-                "coordinateTransformations": [
-                    {"type": "scale", "scale": [1.0, 1.0, 1.0]}
-                ],
             }
-        ]
+        ],
     }

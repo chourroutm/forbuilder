@@ -167,7 +167,9 @@ class TestNiftiReader:
     def test_read_nifti_voxel_size(self, tmp_path):
         from forbuilder.io.nifti import read_nifti, write_nifti
 
-        phantom = GeneratedPhantom(array=np.zeros((4, 6, 8), dtype=np.uint8), voxel_size=(1.5, 0.5, 0.25))
+        phantom = GeneratedPhantom(
+            array=np.zeros((4, 6, 8), dtype=np.uint8), voxel_size=(1.5, 0.5, 0.25)
+        )
         p = tmp_path / "out.nii.gz"
         write_nifti(phantom, p)
         result = read_nifti(p)
@@ -191,8 +193,20 @@ class TestZarrWriter:
         write_zarr(_make_phantom(), p)
         store = zarr.open_group(str(p), mode="r")
         assert "ome" in store.attrs
-        ms = store.attrs["ome"]["multiscales"][0]
-        assert ms["version"] == "0.5"
+        ome = store.attrs["ome"]
+        assert ome["version"] == "0.5"
+        assert "multiscales" in ome
+
+    def test_ome_zarr_valid(self, tmp_path):
+        import zarr
+        from ome_zarr_models.v05.image import Image
+
+        from forbuilder.io.zarr_ import write_zarr
+
+        p = tmp_path / "out.ome.zarr"
+        write_zarr(_make_phantom(), p)
+        store = zarr.open_group(str(p), mode="r")
+        Image.from_zarr(store)  # raises on invalid
 
     def test_array_shape(self, tmp_path):
         import zarr

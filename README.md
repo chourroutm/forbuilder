@@ -8,6 +8,9 @@ Create FORBILD digital phantom volumes as 3-D uint8 arrays.
 pip install forbuilder
 ```
 
+Dependencies pulled in automatically: `numpy`, `tifffile`, `nibabel`, `zarr`, `ome-zarr-models`.
+OME-Zarr output is validated against the [OME-NGFF 0.5 spec](https://ngff.openmicroscopy.org/0.5/) via `ome-zarr-models`.
+
 ## Usage
 
 ```python
